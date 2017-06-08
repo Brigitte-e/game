@@ -1,3 +1,60 @@
 page-form {
+	font-weight: 200;
+
+	.scroll-content {
+		width: 60%;
+    margin: 0 auto;
+	}
+
+	.top-title {
+		height: 30%;
+	  width: 100%;
+	  display: block;
+	  position: relative;
+	  
+		img {
+			width: 70%;
+	 	  position: absolute;
+	 	  left: 0;
+	 	  right: 0;
+	 	  display: inline-block;
+	 	  margin: 0 auto;
+		}	
+
+		h3 {
+			@include vertical-center(30%);
+			color: #00abea;
+			font-weight: normal;
+		}
+	}
+
+
+	.item-block:last-child,
+	.item-wrapper:last-child .item-block,
+  	.item-block:first-child,
+  	.list-md .item-input:last-child {
+		border-color: transparent!important;
+		padding: 0;
+	}
+
+	.forgot-password {
+		color: #454445;
+		display: block;
+    text-align: right;
+	}
+
+	.list {
+		margin-bottom: 0;
+	}
+
+	.switch-status {
+		display: block;
+		text-align: center;
+		margin-top: 20px;
+	}
+	
+	.item-block {
+		background-color: transparent;
+	}
 
 }
