@@ -1,59 +1,101 @@
 page-home {
-	 font-weight: 200;
+	background: url('../../assets/Basic_Screen.jpg');
+	background-size: cover;
 
-	.scroll-content {
-		width: 60%;
-    margin: 0 auto;
+	.content, .scroll-content {
+		background: transparent;
+		padding: 0!important;
 	}
 
-	.top-title {
-		height: 30%;
-	  width: 100%;
-	  display: block;
-	  position: relative;
-	  
-		img {
-			width: 70%;
-	 	  position: absolute;
-	 	  left: 0;
-	 	  right: 0;
-	 	  display: inline-block;
-	 	  margin: 0 auto;
-		}	
-
-		h3 {
-			@include vertical-center(30%);
-			color: #00abea;
-			font-weight: normal;
+	.header {
+		&:after, &:before {
+			display: none;
 		}
 	}
 
-
-	.item-block:last-child,
-	.item-wrapper:last-child .item-block,
-  .item-block:first-child,
-  .list-md .item-input:last-child {
-		border-color: transparent!important;
-		padding: 0;
+	.toolbar-background {
+		background: transparent;
+    	border-color: transparent!important;
 	}
 
-	.forgot-password {
-		color: #454445;
-		display: block;
-    text-align: right;
+	.swiper-wrapper {
+		>.list {
+			margin-bottom: 0;
+		}
 	}
 
-	.list {
-		margin-bottom: 0;
+	.swiper-container-vertical > .swiper-pagination-bullets {
+		.swiper-pagination-bullet {	
+			background: #4ac1ed;
+			margin: 10px auto;
+    		opacity: 1;
+    	}
+
+    	.swiper-pagination-bullet-active {
+			background: $primary-color;
+			width: 14px;
+    		height: 14px;
+		}
 	}
 
-	.switch-status {
-		display: block;
-		text-align: center;
-		margin-top: 20px;
+	.swiper-slide {
+		.slide-zoom {
+			margin-left: 5%;
+		}
+
+		.list {
+			width: 45%;
+			margin-right: 10px;
+			display: inline-block;
+			position: relative;
+
+			.levels {
+				min-height: 95px;
+				overflow: hidden;
+				border-radius: 5px;
+				background: url("../../assets/levels-bg.jpg") #fff;
+    			background-repeat: no-repeat;
+    			background-size: contain;
+
+				.level-image{
+					width: 40%;
+					float: left;
+					display: grid;
+					position: relative;
+				}
+
+				h3 {
+					font-size: 12px;
+				}
+
+				.level-description {
+					width: 60%;
+					font-size: 12px;
+					padding-left: 5%;
+					display: inline-block;
+					@include vertical-center(50%);
+
+					span {
+						color: $primary-color;
+					}
+				}
+			}
+
+			.locked {
+				.level-image:before {
+					content: "";
+					width: 100%;
+					height: 100%;
+					display: block;
+					position: absolute;
+					background: url('../../assets/lock.png') rgba(0, 0, 0, 0.3) center center;
+					background-size: cover;
+				}
+			}
+		}
 	}
-	
-	.item-block {
-		background-color: transparent;
+
+	.slide-zoom {
+		text-align: left;
 	}
 }

@@ -1,0 +1,23 @@
+page-settings {
+  .content, .scroll-content {
+    padding: 16px 0;
+  }
+
+  .setting {
+    text-align: center;
+    padding: 0 0 16px;
+    border-bottom: 1px solid #d9d6d6;
+
+    ion-icon {
+      font-size: 40px;
+    }
+
+    .label, .toggle {
+      display: inline-block;
+    }
+
+    .label {
+      margin: 10px 100px 10px 20px;
+    }
+  }
+}

@@ -1,76 +1,71 @@
-<!--
-  Generated template for the FormPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
- <!-- <ion-navbar>
-    <ion-title>Auth form</ion-title>
-  </ion-navbar>-->
-
-  <!-- <ion-list>
-   <ion-item>
-  &lt;!&ndash;
-      Username:<ion-input type="text" placeholder="Username" value="{{counterValue}}" (click)="getCountedValue()"></ion-input>
-  &ndash;&gt;
-      <ion-input #user_name type="text" placeholder="Password" [(ngModel)]="user_password"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <button ion-button (click)="getCountedValue(user_name.value)">TEst click</button>
-    </ion-item>
-
-    <ion-item>
-      <button ion-button (click)="getAjaxCallTest(user_name.value)">Test AJAX Call GET</button>
-    </ion-item>
-
-    <span>{{message}}</span>
-
-    <ion-item>
-      <button ion-button (click)="getAjaxCallPOSTTest(user_name.value)">Test AJAX Call POST</button>
-    </ion-item>-->
-
-
-  <ion-content padding>
-    <div class="top-title">
-      <img src="../assets/logo.png" alt="">
-      <ng-container [ngSwitch]="state">
-        <h3 *ngSwitchCase="'login'">Sign In</h3>
-        <h3 *ngSwitchCase="'register'">Sign In1</h3>
-        <h3 *ngSwitchCase="'register'">Sign In1</h3>
-      </ng-container>
-    </div>
+<ion-content padding>
+  <div class="top-title">
+    <img src="../assets/logo.png" alt="">
+    <ng-container [ngSwitch]="state">
+      <h3 *ngSwitchCase="'login'">Sign In</h3>
+      <h3 *ngSwitchCase="'register'">Sign Up</h3>
+      <h3 *ngSwitchCase="'forgotPassword'">Forgot Password</h3>
+    </ng-container>
+  </div>
     
-    <ion-list>
+  <ion-list>
+    <ion-list *ngIf="state =='forgotPassword' else normalLoop">
       <ion-item>
-        <ion-input #form_user_login type="text" placeholder="Username" ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input #form_user_password type="text" placeholder="Userpassword" ></ion-input>
-      </ion-item>
+        <ion-input #form_user_password_forgot type="text" placeholder="UserEmail(Forgot password)" [(ngModel)]="emailInput"></ion-input>
+      </ion-item><font class="form-errors email">{{errorEmail}}{{errorMessage}}</font>
     </ion-list>
+    <ng-template #normalLoop>
+      <ng-container *ngFor="let stateField of inputPar; let i = index" [attr.data-index]="i">
+        <ion-list *ngIf="i == 0">
+          <ion-item >
+            <ion-input #form_user_login type="text" placeholder="Username" [(ngModel)] = "emailInput"></ion-input>
+          </ion-item><font class="form-errors email">{{errorEmail}}</font>
+        </ion-list>
+        <ion-list *ngIf="i == 1">
+          <ion-item>
+            <ion-input #form_user_password type="password" placeholder="UserPassword" [(ngModel)] = "passwordInput"></ion-input>
+          </ion-item>
+          <font class="form-errors password">{{errorPassword}}</font>
+        </ion-list>
+        <ion-list *ngIf="i == 2">
+          <ion-item>
+            <ion-input #form_user_password_confirm type="password" placeholder="UserPasswordConfirm" [(ngModel)] = "confirmPasswordInput"></ion-input>
+          </ion-item>
+          <font class="form-errors password">{{errorConfirmPassword}}</font>
+        </ion-list>
+      </ng-container>
+    </ng-template>
+  </ion-list>
+    
 
-    <a class="login-link forgot-password" (click)="getState('forgotPassword')">Forgot Password ?</a>
 
-    <ion-item>
-      <button ion-button block (click)="sendLoginData(form_user_login.value, form_user_password.value)">Sign In</button>
-    </ion-item>
-
-    <div class="switch-status">
-      Don't have an account? <a class="login-link" (click)="getState('register')">Sign Up</a>
+  <div class="switch-status" [ngSwitch]="state">
+    <div *ngSwitchCase="'register'">
+      <button ion-button block (click)="sendRegisterData()"> Register</button>
     </div>
+    <div *ngSwitchCase="'login'">
+      <button ion-button block (click)="sendLoginData()">Sign In</button>
+    </div>  
 
-    <ion-item>
-      <span>Message:{{message}} </span>
-      <span>Error: {{errorMessage}}</span>
-    </ion-item>
+    <div *ngSwitchCase="'forgotPassword'">
+      <button ion-button block (click)="sendForgotPasswordData()"> Forgot password</button>
+    </div>
+  </div>
 
-    <ng-container *ngIf="state == 'register'"><h3>Sign Up</h3></ng-container>
+  <div *ngIf="state !='forgotPassword'">
+    <a class="login-link forgot-password" (click)="getState('forgotPassword', forgotPasswordPage)">Forgot Password ?</a>
+  </div>
 
+
+  <div class="switch-status" [ngSwitch]="state">
+    <div *ngSwitchCase="'login'">Don't have an account? <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>
+    <div *ngSwitchCase="'register'">Already have an account? <a class="login-link" (click)="getState('login', loginPage)">Sign In</a></div>
+    <div *ngSwitchCase="'forgotPassword'"><a class="login-link" (click)="getState('login', loginPage)">Sign In</a> | <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>
+  </div>
 
   <!--<ion-item>
-    <button ion-button (click)="hackGoogle()">Hack Google</button>
-  </ion-item>>-->
+    <span>Message:{{message}} </span>
+    <span>Error: {{errorMessage}}</span>
+  </ion-item>-->
 
 </ion-content>
