@@ -36,8 +36,6 @@
       </ng-container>
     </ng-template>
   </ion-list>
-    
-
 
   <div class="switch-status" [ngSwitch]="state">
     <div *ngSwitchCase="'register'">
@@ -55,7 +53,6 @@
   <div *ngIf="state !='forgotPassword'">
     <a class="login-link forgot-password" (click)="getState('forgotPassword', forgotPasswordPage)">Forgot Password ?</a>
   </div>
-
 
   <div class="switch-status" [ngSwitch]="state">
     <div *ngSwitchCase="'login'">Don't have an account? <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>

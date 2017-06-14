@@ -5,40 +5,40 @@
   Ionic pages and navigation.
 -->
 
-	<ion-header>
-	    <ion-toolbar>
-	      <ion-title></ion-title>
-	      <button ion-button menuToggle>
-	      	<ion-icon name='menu'></ion-icon>
-	      </button>
-	    </ion-toolbar>
-  	</ion-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title></ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content padding>
- <ion-slides direction="vertical" pager>
- 	
-	 <ng-container *ngFor="let stateField of jsonArr; let i = index" [attr.data-index]="i">
-		
-		<ion-list *ngIf="i % 4 == 0">
-			<ion-slide>
-				<ng-container *ngFor="let stateField of slidesTotal; let j = index" [attr.data-index]="j">
-					<ion-list *ngIf="jsonArr[i + j]">
-						<div class='levels {{jsonArr[i + j].locked}}'>
-							<div class="level-image">
-								<img src="{{jsonArr[i + j].imgSrc}}" alt="">
-							</div>
-							<div class="level-description">
-								<h3>{{jsonArr[i + j ].title}}</h3>
-								<p>
-									{{jsonArr[i + j ].body}}
-									<span>{{jsonArr[i + j ].score}}</span>
-								</p>
-							</div>
-						</div>
-					</ion-list>
-				</ng-container>
-	  		</ion-slide>
-		</ion-list>
-	 </ng-container>
-</ion-slides>
+<ion-content>
+  <ion-slides direction="vertical" pager>
+    
+     <ng-container *ngFor="let stateField of jsonArr; let i = index" [attr.data-index]="i">
+      <ion-list *ngIf="i % 4 == 0">
+        <ion-slide>
+          <ng-container *ngFor="let stateField of slidesTotal; let j = index" [attr.data-index]="j">
+            <ion-list *ngIf="jsonArr[i + j]">
+              <div class='levels {{jsonArr[i + j].locked}}'>
+                <div class="level-image">
+                  <img src="{{jsonArr[i + j].imgSrc}}" alt="">
+                </div>
+                <div class="level-description">
+                  <h3>{{jsonArr[i + j ].title}}</h3>
+                  <p>
+                    {{jsonArr[i + j ].body}}
+                    <span>{{jsonArr[i + j ].score}}</span>
+                  </p>
+                </div>
+              </div>
+            </ion-list>
+          </ng-container>
+          </ion-slide>
+      </ion-list>
+     </ng-container>
+
+  </ion-slides>
 </ion-content>

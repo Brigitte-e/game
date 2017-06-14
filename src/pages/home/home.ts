@@ -113,6 +113,7 @@ export class HomePage {
         "score": "217",
         "locked": "locked",
         "imgSrc": "../assets/level-img-2.jpg"
-      }]
+      }
+    ]
   }
 }

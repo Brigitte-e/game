@@ -17,22 +17,22 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AccountPage {
   public userEmail: string;
-
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, private http : Http) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountPage');
+
     var userid = localStorage.getItem('userid');
-	this.http.get('http://localhost:3001/getUserInfo/' + userid)
-	.map((res : Response) => res.json())
-	.subscribe((data) => this.userEmail = data.userEmail);
+  
+    this.http.get('http://localhost:3001/getUserInfo/' + userid)
+      .map((res : Response) => res.json())
+      .subscribe((data) => this.userEmail = data.userEmail);
   }
 
   openPage(pageName:string) : void {
-    console.log(pageName);
     this.navCtrl.push(pageName);
   }
 }
