@@ -1,9 +1,44 @@
 page-form {
   font-weight: 200;
 
+  .form-errors {
+    position: absolute;
+    right: -35%;
+    top: 14px;
+    width: 117px;
+    color: red;
+    background: #fff;
+    padding: 7px 10px;
+    margin: -10px -20px;
+    border-radius: 5px;
+    color: #000;
+
+    -webkit-box-shadow: 0px 2px 46px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 46px -16px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 46px -16px rgba(0,0,0,0.75);
+
+    &:before {
+      content: " ";
+      position: absolute;
+      top: 50%;
+      right: 100%; 
+      margin-top: -10px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent #fff transparent transparent;
+    }
+  }
+
   .scroll-content {
     width: 60%;
     margin: 0 auto;
+    overflow: initial;
+  }
+
+  .label {
+    .icon {
+      color: #000;
+    }
   }
 
   .top-title {
@@ -39,16 +74,39 @@ page-form {
   .forgot-password {
     color: #454445;
     display: block;
-    text-align: right;
+    float: right;
   }
 
   .list {
     margin-bottom: 0;
+    position: relative;
+
+    .list {
+      &:last-of-type {
+        .item-block .item-inner {
+          border: 0;
+        }
+      }
+
+      &:first-of-type {
+        .item-block .item-inner {
+          border-bottom: 0.55px solid #c8c7cc;
+        }
+      }
+    }
   }
 
   .switch-status {
     display: block;
     text-align: center;
+
+    &.button {
+      margin-top: 20px;
+    }
+  }
+
+  .switch-status-item {
+    margin: 10px 0;
   }
   
   .item-block {
@@ -57,12 +115,5 @@ page-form {
 
   .item {
     padding-left: 0;
-  }
-
-  .text-input {
-    @include placeholder {
-      font-weight: 200; 
-      font-size: 18px;
-    }
   }
 }

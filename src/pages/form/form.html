@@ -11,53 +11,57 @@
   <ion-list>
     <ion-list *ngIf="state =='forgotPassword' else normalLoop">
       <ion-item>
-        <ion-input #form_user_password_forgot type="text" placeholder="UserEmail(Forgot password)" [(ngModel)]="emailInput"></ion-input>
-      </ion-item><font class="form-errors email">{{errorEmail}}{{errorMessage}}</font>
+        <ion-label><ion-icon name="person"></ion-icon></ion-label>
+        <ion-input #form_user_password_forgot type="text" placeholder="Email" [(ngModel)]="emailInput"></ion-input>
+      </ion-item><font *ngIf="errorEmail != ''" class="form-errors email">{{errorEmail}}</font>
     </ion-list>
     <ng-template #normalLoop>
       <ng-container *ngFor="let stateField of inputPar; let i = index" [attr.data-index]="i">
         <ion-list *ngIf="i == 0">
           <ion-item >
-            <ion-input #form_user_login type="text" placeholder="Username" [(ngModel)] = "emailInput"></ion-input>
-          </ion-item><font class="form-errors email">{{errorEmail}}</font>
+            <ion-label><ion-icon name="person"></ion-icon></ion-label>
+            <ion-input #form_user_login type="text" placeholder="Email" [(ngModel)] = "emailInput"></ion-input>
+          </ion-item><font *ngIf="errorEmail != ''" class="form-errors email">{{errorEmail}}</font>
         </ion-list>
         <ion-list *ngIf="i == 1">
           <ion-item>
-            <ion-input #form_user_password type="password" placeholder="UserPassword" [(ngModel)] = "passwordInput"></ion-input>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input #form_user_password type="password" placeholder="Password" [(ngModel)] = "passwordInput"></ion-input>
           </ion-item>
-          <font class="form-errors password">{{errorPassword}}</font>
+          <font *ngIf="errorPassword != ''" class="form-errors password">{{errorPassword}}</font>
         </ion-list>
         <ion-list *ngIf="i == 2">
           <ion-item>
-            <ion-input #form_user_password_confirm type="password" placeholder="UserPasswordConfirm" [(ngModel)] = "confirmPasswordInput"></ion-input>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input #form_user_password_confirm type="password" placeholder="Confirm Password" [(ngModel)] = "confirmPasswordInput"></ion-input>
           </ion-item>
-          <font class="form-errors password">{{errorConfirmPassword}}</font>
+          <font *ngIf="errorConfirmPassword != ''" class="form-errors password">{{errorConfirmPassword}}</font>
         </ion-list>
       </ng-container>
     </ng-template>
   </ion-list>
 
-  <div class="switch-status" [ngSwitch]="state">
+  <div *ngIf="state =='login'">
+    <a class="login-link forgot-password" (click)="getState('forgotPassword', forgotPasswordPage)">Forgot Password ?</a>
+  </div>
+
+  <div class="switch-status button" [ngSwitch]="state">
     <div *ngSwitchCase="'register'">
-      <button ion-button block (click)="sendRegisterData()"> Register</button>
+      <button ion-button block (click)="sendRegisterData()">Register</button>
     </div>
     <div *ngSwitchCase="'login'">
       <button ion-button block (click)="sendLoginData()">Sign In</button>
     </div>  
 
     <div *ngSwitchCase="'forgotPassword'">
-      <button ion-button block (click)="sendForgotPasswordData()"> Forgot password</button>
+      <button ion-button block (click)="sendForgotPasswordData()">Forgot password</button>
     </div>
   </div>
 
-  <div *ngIf="state !='forgotPassword'">
-    <a class="login-link forgot-password" (click)="getState('forgotPassword', forgotPasswordPage)">Forgot Password ?</a>
-  </div>
-
   <div class="switch-status" [ngSwitch]="state">
-    <div *ngSwitchCase="'login'">Don't have an account? <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>
-    <div *ngSwitchCase="'register'">Already have an account? <a class="login-link" (click)="getState('login', loginPage)">Sign In</a></div>
-    <div *ngSwitchCase="'forgotPassword'"><a class="login-link" (click)="getState('login', loginPage)">Sign In</a> | <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>
+    <div class="switch-status-item" *ngSwitchCase="'login'">Don't have an account? <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>
+    <div class="switch-status-item" *ngSwitchCase="'register'">Already have an account? <a class="login-link" (click)="getState('login', loginPage)">Sign In</a></div>
+    <div class="switch-status-item" *ngSwitchCase="'forgotPassword'"><a class="login-link" (click)="getState('login', loginPage)">Sign In</a> | <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>
   </div>
 
   <!--<ion-item>

@@ -85,11 +85,13 @@ export class FormPage {
     var value2 = this.passwordInput;
     var checkedFields=this.checkFields(this.emailInput,this.passwordInput,this.confirmPasswordInput, 'registration');
 
-    this.http.post('http://localhost:3001/regUser', 
-      {email : value1, password : value2})
-      .map((res : Response) => res.json())
-      .subscribe((data) => this.navHomePage('FormPage')
-    );
+    if(checkedFields) {
+      this.http.post('http://localhost:3001/regUser', 
+        {email : value1, password : value2})
+        .map((res : Response) => res.json())
+        .subscribe((data) => this.navHomePage('FormPage')
+      );
+    }
   }
 
   emailCheck(valueEmail){
