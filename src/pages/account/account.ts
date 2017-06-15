@@ -25,15 +25,34 @@ export class AccountPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountPage');
 
-    var userid = localStorage.getItem('userid');
-  
-    this.http.get('http://localhost:3001/getUserInfo/' + userid)
-      .map((res : Response) => res.json())
-      .subscribe((data) => this.userEmail = data.userEmail);
+    this.userEmail = localStorage.getItem('uid');
+
   }
 
   openPage(pageName:string) : void {
     this.navCtrl.push(pageName);
+  }
+
+  getHeaders(){
+    var headers = new Headers();
+
+    headers.append('Content-Type', 'application/json')
+    headers.append('uid', localStorage.getItem('uid'))
+    headers.append('client', localStorage.getItem('client'))
+    headers.append('access-token', localStorage.getItem('access-token'))
+    
+    return headers;
+  }
+
+  logOut(){
+    var link = 'http://192.168.1.26:3000'.concat('/auth/sign_out');
+
+    this.http.delete(link, 
+    {headers : this.getHeaders()})
+      .map((res : Response) => res.json())
+      .subscribe((data) => this.openPage('FormPage'));
+
+    localStorage.clear();
   }
 }
 

@@ -22,7 +22,7 @@
         <ion-slide>
           <ng-container *ngFor="let stateField of slidesTotal; let j = index" [attr.data-index]="j">
             <ion-list *ngIf="jsonArr[i + j]">
-              <div class='levels {{jsonArr[i + j].locked}}'>
+              <div class='levels {{jsonArr[i + j].locked}} {{jsonArr[i + j].id}}' (click)="gameLevel(i)">
                 <div class="level-image">
                   <img src="{{jsonArr[i + j].imgSrc}}" alt="">
                 </div>

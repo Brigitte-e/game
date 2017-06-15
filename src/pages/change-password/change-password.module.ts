@@ -13,4 +13,5 @@ import { ChangePasswordPage } from './change-password';
     ChangePasswordPage
   ]
 })
+
 export class ChangePasswordPageModule {}

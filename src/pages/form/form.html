@@ -62,11 +62,11 @@
     <div class="switch-status-item" *ngSwitchCase="'login'">Don't have an account? <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>
     <div class="switch-status-item" *ngSwitchCase="'register'">Already have an account? <a class="login-link" (click)="getState('login', loginPage)">Sign In</a></div>
     <div class="switch-status-item" *ngSwitchCase="'forgotPassword'"><a class="login-link" (click)="getState('login', loginPage)">Sign In</a> | <a class="login-link" (click)="getState('register', registerPage)">Sign Up</a></div>
+    <div class="message">{{message}}</div>
   </div>
 
-  <!--<ion-item>
-    <span>Message:{{message}} </span>
-    <span>Error: {{errorMessage}}</span>
-  </ion-item>-->
+  <div class='error-message'>
+    {{errorMessage}}
+  </div>
 
 </ion-content>

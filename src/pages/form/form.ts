@@ -55,41 +55,37 @@ export class FormPage {
 
   getHeaders(){
     var headers = new Headers();
-    //headers.append('Access-Control-Allow-Origin', '*');
-    //headers.append('AccessControlAllowHeaders', 'Content-Type, Accepts, client');
-    //headers.append('AccessControlAllowMethods', 'POST, GET, PUT, DELETE, OPTIONS');
-    //headers.append('Content-Type', 'application/x-www-form-urlencoded')
-    //headers.append('Connection', 'keep-alive');
-    //headers.append('Vary', 'Origin');
-    //headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    //headers.append('Content-Type', 'application/json; charset=utf-8');
-    //headers.append('Transfer-Encoding', 'chunked');
-    //headers.append('Access-Control-Allow-Credentials', 'true');
-
-    //headers.append('Access-Control-Allow-Methods', ' GET, POST, OPTIONS');
-    //headers.append('Access-Control-Allow-Headers', ' Origin, X-Requested-With, Content-Type, Accept, Authorization, client');
-    //headers.append('Access-Control-Expose-Headers',' client');
-
-    //headers.append('Access-Control-Allow-Headers', 'X-Total-Count');
     headers.append('Content-Type', 'application/json')
     return headers;
   }
 
   sendForgotPasswordData(){
-    var valueAnswer=this.emailCheck(this.emailInput);
+    var checkedFields = this.emailCheck(this.emailInput);
+    var value1 = this.emailInput;
+
+    if (checkedFields){
+      var link = 'http://192.168.1.26:3000'.concat('/auth/password');
+      this.http.post(link, 
+        {email : value1, redirect_url: 'test.com'})
+        .map((res : Response) => res.json())
+        .subscribe((data) => this.message = data.message//this.navHomePage('FormPage')
+      );
+    }
   }
 
   sendRegisterData(){
-
     var value1 = this.emailInput;
     var value2 = this.passwordInput;
+    var value3 = this.confirmPasswordInput;
     var checkedFields=this.checkFields(this.emailInput,this.passwordInput,this.confirmPasswordInput, 'registration');
 
     if(checkedFields) {
-      this.http.post('http://localhost:3001/regUser', 
-        {email : value1, password : value2})
+      var link = 'http://192.168.1.26:3000'.concat('/auth/');
+      //var link ='http://localhost:3001/regUser'
+      this.http.post(link, 
+        {email : value1, password : value2, password_confirmation : value3})
         .map((res : Response) => res.json())
-        .subscribe((data) => this.navHomePage('FormPage')
+        .subscribe((data) => this.navHomePage('HomePage')//this.navHomePage('FormPage')
       );
     }
   }
@@ -156,31 +152,50 @@ export class FormPage {
   }
 
   sendLoginData() {
-
     var error = 'Oops..Something went wrong';
     var checkedFields=this.checkFields(this.emailInput, this.passwordInput,'', 'login');
 
     if(checkedFields){
-      //var link = 'http://192.168.1.26:3000'.concat('/auth/sign_in');
-      var link = 'http://localhost:3001/authUser';
+      var link = 'http://192.168.1.26:3000'.concat('/auth/sign_in');
+      //var link = 'http://localhost:3001/authUser';
       var value1 =this.emailInput;
       var value2=this.passwordInput;
+      var response;
       var result = this.http.post( link, 
-        {email : value1, password : value2})//,
-        //{headers : this.getHeaders()})
-        .map((res : Response) => res.json())
+        {email : value1, password : value2},
+        {headers : this.getHeaders()})
+        .map((res : Response) =>  this.responseData(res))
         .subscribe(
           (data) =>  this.feedBack(data),
-          (error) => this.errorMessage = String(error.json().errors)
-        ) 
-    }else{
+          (error) => this.errorMessageData(String(error.json().errors))
+        ); 
+    } else {
       return error;
     }
   }
 
+  errorMessageData(error){
+    if(error != 'undefigned') {
+      this.errorMessage = error;
+    }
+  }
+
+  responseData(res){
+    localStorage.clear();
+
+    if(res.status==200 && res.headers.get('uid') != null && res.headers.get('access-token') != null && res.headers.get('client') != null){
+      localStorage.setItem('uid',  res.headers.get('uid'));
+      localStorage.setItem('access-token',  res.headers.get('access-token'));
+      localStorage.setItem('client',  res.headers.get('client'));
+      localStorage.setItem('password',  this.passwordInput);
+    }
+
+    return res;
+  }
+
   feedBack(data){
-    localStorage.removeItem('userid');
-    localStorage.setItem('userid',  data.userid);
+    //localStorage.removeItem('userid');
+    //localStorage.setItem('userid',  data.userid);
     this.navHomePage('HomePage');
   }
 
@@ -189,6 +204,7 @@ export class FormPage {
     this.inputPar = fieldsNumber;
     this.errorEmail = '';
     this.errorPassword = '';
+    this.errorMessage = '';
     this.errorConfirmPassword = '';
     this.emailInput = 'mail@mail.com'; 
     this.passwordInput = '123123123';

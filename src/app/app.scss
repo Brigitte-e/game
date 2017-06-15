@@ -22,12 +22,22 @@ button.button-default  {
   background: #fdfdfd;
 }
 
+.header:after {
+  background-image:none;
+}
+
 .menu-enabled {
   .menu-inner {
     .content, .scroll-content, .item , .toolbar-background{
       background: $primary-color;
       color: white;
     }
+
+    /*.item-inner{
+      &:after {
+        
+      }
+    }*/
   }
 
   .toolbar-background {
@@ -71,4 +81,8 @@ button.button-default  {
 
 .list > .item-block:last-child .item-inner {
   border-bottom: 0.55px solid #c8c7cc;
+}
+
+.message {
+  text-align: center;;
 }

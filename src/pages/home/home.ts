@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage} from 'ionic-angular';
+import { IonicPage,  NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the HomePage page.
@@ -12,11 +12,13 @@ import { IonicPage} from 'ionic-angular';
   selector: 'page-home',
   templateUrl: 'home.html',
 })
+
 export class HomePage {
   public slidesTotal : number[];
   public jsonArr : any;
+  public headerTitle: string;
 
-  constructor() {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.slidesTotal = new Array(4);
   }
 
@@ -115,5 +117,16 @@ export class HomePage {
         "imgSrc": "../assets/level-img-2.jpg"
       }
     ]
+  }
+
+  gameLevel(number) : void{
+    this.navCtrl.push('RulesPage');
+
+    localStorage.setItem('level-title',  this.jsonArr[number].title);
+
+    //this.headerTitle = title;
+
+
+    //.push('GamePage');
   }
 }
