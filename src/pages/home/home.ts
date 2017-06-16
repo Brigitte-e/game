@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage,  NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { Http, Response, Headers, RequestOptions} from '@angular/http';
+import jQuery from "jquery";
+import 'rxjs/add/operator/map';
 
 /**
  * Generated class for the HomePage page.
@@ -18,14 +22,32 @@ export class HomePage {
   public jsonArr : any;
   public headerTitle: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private http : Http, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
     this.slidesTotal = new Array(4);
+  }
+
+  getHeaders(){
+    var headers = new Headers();
+
+    headers.append('Content-Type', 'application/json')
+    headers.append('uid', localStorage.getItem('uid'))
+    headers.append('client', localStorage.getItem('client'))
+    headers.append('access-token', localStorage.getItem('access-token'))
+
+    return headers;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
 
-    this.jsonArr = [
+    var link = 'http://192.168.1.26:3000'.concat('/bundles/');
+    this.http.get(link, 
+      {headers : this.getHeaders()})
+      .map((res : Response) => res.json())
+      .subscribe((data) => this.jsonArr = data//this.navHomePage('FormPage')
+    );
+
+   /* this.jsonArr = [
       {
         "userId": 1,
         "id": 1,
@@ -38,7 +60,7 @@ export class HomePage {
       {
         "userId": 1,
         "id": 2,
-        "title": "Evil beast",
+        "title": "Evil beast2",
         "body": "Highest Score:",
         "score": "216",
         "locked": "unlocked",
@@ -47,7 +69,7 @@ export class HomePage {
       {
         "userId": 1,
         "id": 3,
-        "title": "Evil beast",
+        "title": "Evil beast3",
         "body": "Highest Score:",
         "score": "217",
         "locked": "unlocked",
@@ -116,17 +138,24 @@ export class HomePage {
         "locked": "locked",
         "imgSrc": "../assets/level-img-2.jpg"
       }
-    ]
+    ]*/
   }
 
-  gameLevel(number) : void{
-    this.navCtrl.push('RulesPage');
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'This level is locked',
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
 
-    localStorage.setItem('level-title',  this.jsonArr[number].title);
-
-    //this.headerTitle = title;
-
-
-    //.push('GamePage');
+  gameLevel(number, object) : void{
+    if(jQuery(object.path).hasClass('unlocked-false')){
+      this.presentAlert();
+    } else {
+      localStorage.setItem('level-title',  this.jsonArr[number].title);
+      localStorage.setItem('level-id',  this.jsonArr[number].id);
+      this.navCtrl.push('RulesPage');
+    }
   }
 }

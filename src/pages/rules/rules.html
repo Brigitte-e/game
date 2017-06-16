@@ -13,6 +13,35 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class='new-game'>
+	<ion-grid>
+	 	<ion-row>
+	 	    <ion-col col-4>
+				<img class='game-controls-img' src="../../assets/game-controls.png" alt="">
+				<div class='swipe-left'>Swipe in any direction</div>
+	 	    </ion-col>
+	 	    <ion-col class='right-column' col-8>
+				<div class="level-info">
+					<div class="level-img">
+						<img src="{{levelImage}}" alt="">
+					</div>
+	 	    		<div class="level-description">
+	 	    			<div class="level-description-text">
+	 	    				{{levelText}}
+	 	    			</div>
+	 	    		</div>
+	 	    	</div>
+				<div class='game-info'>
+	 	    		<img class="stars" src="{{starts}}" alt="">
+				
+	 	    		<ul>
+	 	    			<li>Last Score: <span>{{lastScore}}</span></li>
+	 	    			<li>Max Steak: <span>{{maxStreak}}</span></li>
+	 	    			<li>Average reaction time: <span>{{reactionTime}}s</span></li>
+	 	    		</ul>
+	 	    	</div>
+	 	    	<button ion-button block (click)="openPage('GamePage')">Start</button>
+	 	    </ion-col>
+	 	</ion-row>
+	</ion-grid>
 </ion-content>

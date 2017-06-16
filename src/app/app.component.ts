@@ -6,7 +6,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //import {Angular2TokenService} from "../../node_modules/angular2-token/";
 import {environment} from "./enviroments/enviroments";
 import { FormPage } from '../pages/form/form';
-
 import jQuery from "jquery";
 
 @Component({
@@ -28,7 +27,6 @@ export class MyApp {
   }
 
   openPage(pageName:string) : void {
-    console.log(pageName);
     this.app.getActiveNav().push(pageName);
     //this.navCtrl.push(pageName);
 

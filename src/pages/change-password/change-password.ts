@@ -32,15 +32,15 @@ export class ChangePasswordPage {
   	public successMessage: string;
 
   	getHeaders(){
- 	  var headers = new Headers();
-
- 	  headers.append('Content-Type', 'application/json')
- 	  headers.append('uid', localStorage.getItem('uid'))
- 	  headers.append('client', localStorage.getItem('client'))
- 	  headers.append('access-token', localStorage.getItem('access-token'))
-
- 	  return headers;
- 	}
+ 	    var headers = new Headers();
+  
+ 	    headers.append('Content-Type', 'application/json')
+ 	    headers.append('uid', localStorage.getItem('uid'))
+ 	    headers.append('client', localStorage.getItem('client'))
+ 	    headers.append('access-token', localStorage.getItem('access-token'))
+  
+ 	    return headers;
+ 	  }
 
 	sendChangePasswordData(){
 	   	var value1 = this.oldPasswordInput;

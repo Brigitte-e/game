@@ -1,3 +1,106 @@
 page-rules {
+  .swipe-left {
+    color: $primary-color;
+    background: #fff;
+    padding: 20px 15px;
+    margin: 15px 0 0 -10px;
+    border-radius: 0px 200px 200px 0px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
 
+  .game-controls-img {
+    margin-top: 10px;
+    max-width: 205px;
+    width: 100%;
+  }
+
+  .right-column {
+    padding: 3% 5%;
+    position: relative;
+
+    .stars {
+      display: inline-block;
+      width: 25%;
+      max-width: 110px;
+      @include vertical-center(50%);
+    }
+
+    ul {     
+      padding: 0;
+      list-style: none;
+      font-weight: 200;
+      padding-left: 33%;
+      display: inline-block;
+
+      span {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .new-game {
+    .level-info {
+      overflow: hidden;
+      font-size: 12px;
+      background: #fff;
+      max-height: 105px;
+      border-radius: 5px;
+      display: inline-block;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .level-description {
+      padding: 10px;
+      width: 70%;
+      display: inline-block;
+    }
+
+    .level-description-text {
+      max-height: 85px;
+      overflow: auto;
+      text-align: center;
+      padding-right: 5px;
+
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #f7f5f5;
+      }
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        background-color: #f7f5f5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: $primary-color;
+      }
+    }
+
+    .level-img {
+      img {
+        float: left;
+        width: 30%;
+      }
+    }
+
+    .game-info {
+      position: relative;
+      margin: 3% 0;
+    }
+  }
+
+  @media only screen 
+    and (max-width : 568px) 
+    and (max-height : 320px)  { 
+    .new-game {
+      .level-info {
+        max-height: 90px;
+      }
+
+      .level-description-text {
+        max-height: 72px;
+      }
+    }
+  }
 }

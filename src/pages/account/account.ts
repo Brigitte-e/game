@@ -26,7 +26,6 @@ export class AccountPage {
     console.log('ionViewDidLoad AccountPage');
 
     this.userEmail = localStorage.getItem('uid');
-
   }
 
   openPage(pageName:string) : void {

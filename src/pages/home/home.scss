@@ -56,6 +56,7 @@ page-home {
         background: url("../../assets/levels-bg.jpg") #fff;
         background-repeat: no-repeat;
         background-size: contain;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
         h3 {
           font-size: 12px;
@@ -81,11 +82,12 @@ page-home {
         }
       }
 
-      .locked {
+      .unlocked-false {
         .level-image:before {
           content: "";
           width: 100%;
           height: 100%;
+          max-width: 197px;
           display: block;
           position: absolute;
           background: url('../../assets/lock.png') rgba(0, 0, 0, 0.3) center center;

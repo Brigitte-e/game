@@ -103,10 +103,10 @@ export class FormPage {
   }
 
   emailPassword(valuePassword){
-    if(typeof valuePassword != 'undefined' && Object.keys(valuePassword) != null && Object.keys(valuePassword).length != 0 && Object.keys(valuePassword).length > 5){
+    if(typeof valuePassword != 'undefined' && Object.keys(valuePassword) != null && Object.keys(valuePassword).length != 0 && Object.keys(valuePassword).length > 7){
       return true; 
     }else{
-      this.errorPassword = 'Password must be at least 6 characters long';
+      this.errorPassword = 'Password must be at least 8 characters long';
       return false; 
     }
   }
